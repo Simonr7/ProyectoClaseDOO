@@ -6,10 +6,9 @@ import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data.Mensaje;
 public interface MessageCatalog {
 	
 	void inicializar();
-	String obtenerContendidoMensaje(final CodigoMensaje codigo , String...parametros);
 	
-	Mensaje obtenerMensaje(final CodigoMensaje codigo, String...parametros);
-	
-	
+	String obtenerContenidoMensaje(final CodigoMensaje Codigo, final String... parametros);
+	Mensaje obtenerMensaje(final CodigoMensaje codigo, final String... parametros);
 
 }
+
