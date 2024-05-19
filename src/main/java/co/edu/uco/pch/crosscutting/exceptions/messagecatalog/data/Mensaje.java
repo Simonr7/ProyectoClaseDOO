@@ -1,54 +1,42 @@
 package co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data;
 
-public final class Mensaje {
-	
+import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
+
+public final class Mensaje{
+
 	private CodigoMensaje codigo;
 	private String contenido;
 	
-	
-	
-	public Mensaje(final CodigoMensaje codigo,final  String contenido) {
+	public Mensaje( final CodigoMensaje codigo, final String contenido)
+	{
 		setCodigo(codigo);
 		setContenido(contenido);
 	}
 
+	public final CodigoMensaje getCodigo() {
+		return this.codigo;
+	}
 
-
-	private final void setCodigo(CodigoMensaje codigo) {
+	public void setCodigo(CodigoMensaje codigo) {
 		this.codigo = codigo;
 	}
 
-
-	private final void setContenido(String contenido) {
-		this.contenido = contenido;
-	}
-
-
-
-	public final CodigoMensaje getCodigo() {
-		return codigo;
-	}
-
-	public final String getContenido() {
+	public String getContenido() {
 		return contenido;
 	}
-	
-	public final boolean esBase() {
-		
-		return getCodigo().isBase();
-		
+
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
 	}
 	
-	public final String getIdentificador() {
-		
-		return getCodigo().getIdentificador();
-		
+	public final String getIdentifier()
+	{
+		return this.getCodigo().getIdentifier();
 	}
 	
-	
-	
-
-
-	
-
+	public boolean isBase()
+	{
+		return this.codigo.getIsBase();
+	}
 }
+

@@ -4,47 +4,64 @@ import co.edu.uco.pch.crosscutting.exceptions.enums.Lugar;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 
-
 public class PCHException extends RuntimeException {
 
-	private static final long serialVersionUID = -1204292929766811976L;
-	protected String mensajeUsuario;
-	protected Lugar lugar;
+	private static final long serialVersionUID = -1119971647684852037L;
+
+	protected String _userMesaage;
+	protected Lugar _exceptionLugar;
+	protected String _techMessage;
 	
-	public PCHException(String mensajeTecnico,String mensajeUsuario, Lugar lugar, Throwable excepcionRaiz) {
-		super(mensajeTecnico,excepcionRaiz);
-		setMensajeUsuario(mensajeUsuario);
-		setLugar(lugar);
-	}
-	public PCHException(final String mensajeUsuario, Lugar lugar) {
-		super(mensajeUsuario);
-		setMensajeUsuario(mensajeUsuario);
-		setLugar(lugar);
-	}
-	
-	public PCHException( String mensajeTecnico,String mensajeUsuario, Lugar lugar) {
-		super(mensajeTecnico);
-		setMensajeUsuario(mensajeUsuario);
-		setLugar(lugar);
-	}
-	private void setMensajeUsuario(final String mensajeUsuario) {
-		this.mensajeUsuario = TextHelper.applyTrim(mensajeUsuario);
-	}
-
-	private void setLugar(final Lugar lugar) {
-		this.lugar = ObjectHelper.getObjectHelper().getDefaultValue(lugar, Lugar.DEFAULT);
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public final String getMensajeUsuario() {
-		return mensajeUsuario;
-	}
-
-	public final Lugar getLugar() {
-		return lugar;
-	}
+	public PCHException(final String technicalMessage, final String userMessage, final Lugar exceptionLugar, final Throwable rootException)
+	{
+		super(technicalMessage, rootException);
 		
+		setUserMessage(userMessage);
+		setExceptionLugar(exceptionLugar);
+		setTechMessage(technicalMessage);
+	}
+	
+	public PCHException(final String userMessage, final Lugar exceptionLugar)
+	{
+		super(userMessage, new Exception());
+		
+		setUserMessage(userMessage);
+		setExceptionLugar(exceptionLugar);
+	}
+	
+	public PCHException(final String technicalMessage, final String userMessage, final Lugar exceptionLugar)
+	{
+		super(technicalMessage, new Exception());
+		
+		setUserMessage(userMessage);
+		setExceptionLugar(exceptionLugar);
+		setTechMessage(technicalMessage);
+	}
+
+	public void setUserMessage(final String userMesaage) {
+		this._userMesaage = TextHelper.applyTrim(userMesaage);
+	}
+	
+	public void setTechMessage(final String techMessage)
+	{
+		this._techMessage = techMessage;
+	}
+
+	public void setExceptionLugar(final Lugar lugar) {
+		this._exceptionLugar = ObjectHelper.getObjectHelper().getDefaultValue(lugar, Lugar.CONFIG);
+	}
+
+	public final String getUserMesaage() {
+		return this._userMesaage;
+	}
+
+	public final Lugar getExceptionLugar() {
+		return this._exceptionLugar;
+	}
+	
+	public String getTehMessage()
+	{
+		return this._techMessage;
+	}
+	
 }

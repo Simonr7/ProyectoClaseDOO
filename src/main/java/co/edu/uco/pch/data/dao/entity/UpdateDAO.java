@@ -1,7 +1,8 @@
+
 package co.edu.uco.pch.data.dao.entity;
 
-public interface UpdateDAO<SW> {
+interface UpdateDAO <SR> {
 
-	void modificar(SW data);
+	void update(SR data);
 	
 }

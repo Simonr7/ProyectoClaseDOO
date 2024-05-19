@@ -2,45 +2,49 @@ package co.edu.uco.pch.dto;
 
 import java.util.UUID;
 
-public final class DepartamentoDTO {
-	private UUID id;
+import co.edu.uco.qiu.config.crosscutting.helpers.ExceptionHandler;
+import co.edu.uco.qiu.config.crosscutting.helpers.StringTool;
+import co.edu.uco.qiu.config.dto.CoreDTO;
+
+public final class DepartamentoDTO extends CoreDTO {
+
 	private String nombre;
 	private PaisDTO pais;
 	
-	public DepartamentoDTO() {
+	public DepartamentoDTO()
+	{
 		super();
 	}
 	
-	public DepartamentoDTO(final UUID id, final String nombre, final PaisDTO pais) {
-		super();
-		setId (id);
-		setNombre (nombre);
-		setPais  (pais);
+	public DepartamentoDTO( UUID code, String name, PaisDTO pais )
+	{
+		setCodigo( code );
+		setNombre( name );
+		setPais( pais );
 	}
 	
-	public static final DepartamentoDTO build() {
-		return new DepartamentoDTO();
-	}
-	public final UUID getId() {
-		return id;
-	}
-	public final DepartamentoDTO setId(final UUID id) {
-		this.id = id;
+	// Setters
+	
+	public final DepartamentoDTO setNombre( String nombre )
+	{
+		ExceptionHandler.checkDTONullParameter(nombre);
+		
+		this.nombre = StringTool.applyTrim(nombre);
 		return this;
 	}
-	public final String getNombre() {
-		return nombre;
-	}
-	public final  DepartamentoDTO setNombre(final String nombre) {
-		this.nombre = nombre;
-		return this;
-	}
-	public final PaisDTO getPais() {
-		return pais;
-	}
-	public final  DepartamentoDTO setPais(final PaisDTO pais) {
+	
+	public final DepartamentoDTO setPais( PaisDTO pais )
+	{
+		ExceptionHandler.checkDTONullParameter(pais);
+		
 		this.pais = pais;
 		return this;
 	}
-
+	
+	// Getters
+	
+	public final String getNombre() {return this.nombre;}
+	
+	public final PaisDTO getPais() {return this.pais;}
+	
 }

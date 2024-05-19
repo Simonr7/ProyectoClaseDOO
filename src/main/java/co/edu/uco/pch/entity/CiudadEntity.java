@@ -2,45 +2,49 @@ package co.edu.uco.pch.entity;
 
 import java.util.UUID;
 
-public final class CiudadEntity {
-	private UUID id;
-	private String nombre;
-	private DepartamentoEntity Departamento;
+import co.edu.uco.qiu.config.crosscutting.helpers.ExceptionHandler;
+import co.edu.uco.qiu.config.crosscutting.helpers.StringTool;
+import co.edu.uco.qiu.config.entity.CoreEntity;
 
-	public CiudadEntity(){
+public final class CiudadEntity extends CoreEntity {
+	
+	private String nombre;
+	private DepartamentoEntity departamento;
+	
+	public CiudadEntity()
+	{
 		super();
 	}
 	
-	public CiudadEntity(final UUID id,final  String nombre, final DepartamentoEntity departamento) {
-		setId  (id);
-		setNombre  (nombre);
-		setDepartamento  (departamento);
+	public CiudadEntity( UUID codigo, String nombre, DepartamentoEntity departamento )
+	{
+		setCodigo( codigo );
+		setNombre( nombre );
+		setDepartamento( departamento );
 	}
 	
-	public static final CiudadEntity build() {
-		return new CiudadEntity();
-	}
-	public final UUID getId() {
-		return id;
-	}
-	public final CiudadEntity setId(final UUID id) {
-		this.id = id;
+	// Setters
+	
+	public final CiudadEntity setNombre( String nombre )
+	{
+		ExceptionHandler.checkDTONullParameter(nombre);
+		
+		this.nombre = StringTool.applyTrim(nombre);
 		return this;
 	}
-	public final String getNombre() {
-		return nombre;
-	}
-	public final  CiudadEntity  setNombre(final String nombre) {
-		this.nombre = nombre;
+	
+	public final CiudadEntity setDepartamento( DepartamentoEntity departamento )
+	{
+		ExceptionHandler.checkDTONullParameter(departamento);
+		
+		this.departamento = departamento;
 		return this;
 	}
-	public final DepartamentoEntity getDepartamento() {
-		return Departamento;
-	}
-	public final  CiudadEntity  setDepartamento(final DepartamentoEntity departamento) {
-		Departamento = departamento;
-		return this;
-	}
-
+	
+	// Getters
+	
+	public final String getNombre() {return this.nombre;}
+	
+	public final DepartamentoEntity getDepartamento() {return this.departamento;}
 
 }

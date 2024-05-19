@@ -1,41 +1,38 @@
 package co.edu.uco.pch.dto;
 
-import java.util.UUID;
+import java.util.UUID; 
 
+import co.edu.uco.pch.crosscutting.helpers.ExceptionHandler;
 import co.edu.uco.pch.crosscutting.helpers.TextHelper;
+import co.edu.uco.pch.dto.CoreDTO;
 
-public final class PaisDTO {
-	private UUID id;
+public final class PaisDTO extends CoreDTO {
+	
 	private String nombre;
 	
-	public PaisDTO() {
-	super();
+	public PaisDTO()
+	{
+		super();
 	}
 	
-	public PaisDTO(final UUID id, final String nombre) {
-		setId(id);
-		setNombre(nombre);
+	public PaisDTO( final UUID codigo, final String nombre )
+	{
+		setCodigo( codigo );
+		setNombre( nombre );
 	}
 	
-	public static final PaisDTO build() {
-		return new PaisDTO();
-	}
+	// Setters
 	
-	
-	public final UUID getId() {
-		return id;
-	}
-	public final PaisDTO setId(final UUID id) {
-		this.id = id;
-		return this;
-	}
-	public final String getNombre() {
-		return nombre;
-	}
-	public final PaisDTO setNombre(final String nombre) {
+	public final PaisDTO setNombre( String nombre )
+	{
+		ExceptionHandler.checkDTONullParameter(nombre);
+		
 		this.nombre = TextHelper.applyTrim(nombre);
 		return this;
 	}
 	
+	// Getters
+	
+	public final String getNombre() {return this.nombre;}
 
 }

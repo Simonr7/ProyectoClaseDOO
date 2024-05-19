@@ -5,5 +5,4 @@ import co.edu.uco.pch.entity.PaisEntity;
 public interface PaisDAO extends RetrieveDAO<PaisEntity> {
 
 	
-	
 }

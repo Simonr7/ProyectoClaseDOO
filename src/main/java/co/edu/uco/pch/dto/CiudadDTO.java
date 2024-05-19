@@ -2,45 +2,49 @@ package co.edu.uco.pch.dto;
 
 import java.util.UUID;
 
-public final class CiudadDTO {
-	private UUID id;
-	private String nombre;
-	private DepartamentoDTO Departamento;
+import co.edu.uco.qiu.config.crosscutting.helpers.ExceptionHandler;
+import co.edu.uco.qiu.config.crosscutting.helpers.StringTool;
+import co.edu.uco.qiu.config.dto.CoreDTO;
 
-	public CiudadDTO(){
+public final class CiudadDTO extends CoreDTO {
+	
+	private String nombre;
+	private DepartamentoDTO departamento;
+	
+	public CiudadDTO()
+	{
 		super();
 	}
 	
-	public CiudadDTO(final UUID id,final  String nombre, final DepartamentoDTO departamento) {
-		setId  (id);
-		setNombre  (nombre);
-		setDepartamento  (departamento);
+	public CiudadDTO( UUID codigo, String nombre, DepartamentoDTO departamento )
+	{
+		setCodigo( codigo );
+		setNombre( nombre );
+		setDepartamento( departamento );
 	}
 	
-	public static final CiudadDTO build() {
-		return new CiudadDTO();
-	}
-	public final UUID getId() {
-		return id;
-	}
-	public final CiudadDTO setId(final UUID id) {
-		this.id = id;
+	// Setters
+	
+	public final CiudadDTO setNombre( String nombre )
+	{
+		ExceptionHandler.checkDTONullParameter(nombre);
+		
+		this.nombre = StringTool.applyTrim(nombre);
 		return this;
 	}
-	public final String getNombre() {
-		return nombre;
-	}
-	public final  CiudadDTO  setNombre(final String nombre) {
-		this.nombre = nombre;
+	
+	public final CiudadDTO setDepartamento( DepartamentoDTO departamento )
+	{
+		ExceptionHandler.checkDTONullParameter(departamento);
+		
+		this.departamento = departamento;
 		return this;
 	}
-	public final DepartamentoDTO getDepartamento() {
-		return Departamento;
-	}
-	public final  CiudadDTO  setDepartamento(final DepartamentoDTO departamento) {
-		Departamento = departamento;
-		return this;
-	}
-
+	
+	// Getters
+	
+	public final String getNombre() {return this.nombre;}
+	
+	public final DepartamentoDTO getDepartamento() {return this.departamento;}
 
 }

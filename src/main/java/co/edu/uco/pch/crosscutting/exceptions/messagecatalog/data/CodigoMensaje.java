@@ -1,85 +1,77 @@
 package co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data;
 
-import static co.edu.uco.pch.crosscutting.helpers.TextHelper.concatenate;
-import static co.edu.uco.pch.crosscutting.helpers.TextHelper.UNDERLINE;
+import co.edu.uco.pch.crosscutting.helpers.TextHelper;
+import static co.edu.uco.pch.crosscutting.helpers.TextHelper.UNDERSCORE;
 
 public enum CodigoMensaje {
 	
-	M00001(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00001", true),
-	M00002(TipoMensaje.USUARIO, CategoriaMensaje.ERROR, "00002", true),
-	M00003(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00003", true),
-	M00004(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00004", true),
-	M00005(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00005", true),
-	M00006(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00006", true),
-	M00007(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00007", true),
-	M00008(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00008", true),
-	M00009(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00009", true),
-	M00010(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00010", true),
-	M00011(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00011", true),
-	M00012(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00012", true),
-	M00013(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00013", true),
-	M00014(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00014", true),
-	M00015(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00015", true),
-	M00016(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00016", true),
-	M00017(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00017", true),
-	M00018(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00018", true),
-	M00019(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00019", true),
-	M00020(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00020", true),
-	M00021(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00021", true),
-	M00022(TipoMensaje.TECNICO, CategoriaMensaje.ERROR, "00022", true);
+	M00001(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00001", true),
+	M00002(CategoriaMensaje.ERROR, TipoMensaje.USUARIO, "00002", true),
+	M00003(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00003", true),
+	M00004(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00004", true),
+	M00005(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00005", true),
+	M00006(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00006", true),
+	M00007(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00007", true),
+	M00008(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00008", true),
+	M00010(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00010", false),
+	M00009(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00009", true),
+	M00011(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00011", true),
+	M00012(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00012", true),
+	M00013(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00013", true),
+	M00014(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00014", true),
+	M00015(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00015", true),
+	M00016(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00016", true),
+	M00017(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00017", true),
+	M00018(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00018", true),
+	M00019(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00019", true),
+	M00020(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00020", true),
+	M00021(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00021", true),
+	M00022(CategoriaMensaje.ERROR, TipoMensaje.TECNICO, "00022", true);
 	
-	
-	private TipoMensaje tipo;
-	private CategoriaMensaje categoria;
-	private String codigo;
-	private boolean base;
-	
-	private CodigoMensaje(final TipoMensaje tipo, final CategoriaMensaje categoria, final String codigo, final boolean base) {
-		setTipo(tipo);
+	private CodigoMensaje(CategoriaMensaje categoria, TipoMensaje tipo, String id, final boolean base)
+	{
 		setCategoria(categoria);
-		setCodigo(codigo);
-		setBase(base);
+		setTipo(tipo);
+		setId(id);
+		setIsBase(base);
 	}
 	
-	public final TipoMensaje getTipo() {
-		return tipo;
-	}
+	private CategoriaMensaje categoria;
+	private TipoMensaje tipo;
+	private String id;
+	private boolean base;
 
-	public final CategoriaMensaje getCategoria() {
-		return categoria;
+	public CategoriaMensaje getCategoria() {
+		return this.categoria;
 	}
-
-	public final String getCodigo() {
-		return codigo;
-	}
-	
-	private final void setTipo(final TipoMensaje tipo) {
-		this.tipo = tipo;
-	}
-	public final boolean isBase() {
-		return base;
-	}
-	
-	public String getIdentificador() {
-		return concatenate(getTipo().name(),UNDERLINE,getCategoria().toString(),UNDERLINE,getCodigo());
-	}
-	
-	private final void setCategoria(final CategoriaMensaje categoria) {
+	private void setCategoria(final CategoriaMensaje categoria) {
 		this.categoria = categoria;
 	}
-
-	private final void setCodigo(final String codigo) {
-		this.codigo = codigo;
+	public TipoMensaje getTipo() {
+		return this.tipo;
+	}
+	private void setTipo(final TipoMensaje tipo) {
+		this.tipo = tipo;
+	}
+	public String getId() {
+		return this.id;
+	}
+	private void setId(final String id) {
+		this.id = id;
 	}
 	
-	private final void setBase(boolean base) {
+	public boolean getIsBase()
+	{
+		return this.base;
+	}
+	
+	private void setIsBase(final boolean base)
+	{
 		this.base = base;
 	}
-
 	
-	public static void main(String[] args) {
-		System.out.println(M00001.getIdentificador());	
+	public String getIdentifier()
+	{
+		return TextHelper.concatenate(this.getCategoria().name(), UNDERSCORE, this.getTipo().name(), UNDERSCORE, this.getId());
 	}
-	
-	
 }

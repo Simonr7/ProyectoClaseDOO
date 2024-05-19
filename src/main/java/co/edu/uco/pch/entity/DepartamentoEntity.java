@@ -2,48 +2,49 @@ package co.edu.uco.pch.entity;
 
 import java.util.UUID;
 
-import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
-import co.edu.uco.pch.crosscutting.helpers.TextHelper;
+import co.edu.uco.qiu.config.crosscutting.helpers.ExceptionHandler;
+import co.edu.uco.qiu.config.crosscutting.helpers.StringTool;
+import co.edu.uco.qiu.config.entity.CoreEntity;
 
-public final class DepartamentoEntity {
-	private UUID id;
+public final class DepartamentoEntity extends CoreEntity {
+
 	private String nombre;
 	private PaisEntity pais;
 	
-	public DepartamentoEntity() {
+	public DepartamentoEntity()
+	{
 		super();
 	}
 	
-	public DepartamentoEntity(final UUID id, final String nombre, final PaisEntity pais) {
-		super();
-		setId (id);
-		setNombre (nombre);
-		setPais  (pais);
+	public DepartamentoEntity( UUID codigo, String nombre, PaisEntity pais )
+	{
+		setCodigo( codigo );
+		setNombre( nombre );
+		setPais( pais );
 	}
 	
-	public static final DepartamentoEntity build() {
-		return new DepartamentoEntity();
-	}
-	public final UUID getId() {
-		return id;
-	}
-	public final DepartamentoEntity setId(final UUID id) {
-		this.id = id;
+	// Setters
+	
+	public final DepartamentoEntity setNombre( String nombre )
+	{
+		ExceptionHandler.checkDTONullParameter(nombre);
+		
+		this.nombre = StringTool.applyTrim(nombre);
 		return this;
 	}
-	public final String getNombre() {
-		return nombre;
-	}
-	public final  DepartamentoEntity setNombre(final String nombre) {
-		this.nombre = TextHelper.applyTrim(nombre);
+	
+	public final DepartamentoEntity setPais( PaisEntity pais )
+	{
+		ExceptionHandler.checkDTONullParameter(pais);
+		
+		this.pais = pais;
 		return this;
 	}
-	public final PaisEntity getPais() {
-		return pais;
-	}
-	public final  DepartamentoEntity setPais(final PaisEntity pais) {
-		this.pais = ObjectHelper.getObjectHelper().getDefaultValue(pais, new PaisEntity());
-		return this;
-	}
-
+	
+	// Getters
+	
+	public final String getNombre() {return this.nombre;}
+	
+	public final PaisEntity getPais() {return this.pais;}
+	
 }

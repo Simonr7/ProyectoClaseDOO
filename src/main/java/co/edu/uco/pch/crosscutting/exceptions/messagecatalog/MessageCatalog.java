@@ -1,14 +1,15 @@
 package co.edu.uco.pch.crosscutting.exceptions.messagecatalog;
 
-import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data.Mensaje;
+import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 
 public interface MessageCatalog {
-	
-	void inicializar();
-	
-	String obtenerContenidoMensaje(final CodigoMensaje Codigo, final String... parametros);
-	Mensaje obtenerMensaje(final CodigoMensaje codigo, final String... parametros);
 
+	void initialize();
+	
+	String getMensajeContenido(final CodigoMensaje codigo, String... params);
+	
+	Mensaje getMensaje(final CodigoMensaje codigo, String... params);
+
+	String getContenido(CodigoMensaje codigo, String... params);
 }
-

@@ -1,30 +1,24 @@
 package co.edu.uco.pch.data.dao.factory;
 
-import co.edu.uco.pch.data.dao.entity.CiudadDAO;
+import co.edu.uco.pch.data.dao.entity.CiudadDAO; 
 import co.edu.uco.pch.data.dao.entity.DepartamentoDAO;
 import co.edu.uco.pch.data.dao.entity.PaisDAO;
 import co.edu.uco.pch.data.dao.factory.concrete.AzureSQLDAOFactory;
 
 public interface DAOFactory {
-
-	default DAOFactory getFactory() {
+	
+	default DAOFactory getFactory()
+	{
 		return new AzureSQLDAOFactory();
 	}
 
-	void abrirConexion();
-
-	void cerrarConexion();
-
-	void iniciarTransaccion();
-
-	void confirmarTransaccion();
-
-	void cancelarTransaccion();
-
+	void openConnection();
+	void closeConnection();
+	void startTransaction();
+	void confirmTransaction();
+	void cancelTransaction();
+	
 	PaisDAO getPaisDAO();
-
 	DepartamentoDAO getDepartamentoDAO();
-
 	CiudadDAO getCiudadDAO();
 }
-

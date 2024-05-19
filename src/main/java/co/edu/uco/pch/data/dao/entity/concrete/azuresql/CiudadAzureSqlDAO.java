@@ -7,72 +7,65 @@ import java.util.List;
 import java.util.UUID;
 
 import co.edu.uco.pch.crosscutting.exceptions.customs.DataPCHExceptions;
+import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 import co.edu.uco.pch.data.dao.entity.CiudadDAO;
 import co.edu.uco.pch.data.dao.entity.concrete.SqlConnection;
 import co.edu.uco.pch.entity.CiudadEntity;
 
-
-
 public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO {
 
-	public CiudadAzureSqlDAO(final Connection conexion) {
-		super(conexion);
+	public CiudadAzureSqlDAO(final Connection connection) {
+		
+		super(connection);
 	}
 
 	@Override
-	public final void crear(final CiudadEntity data) {
+	public final void create(final CiudadEntity data) {
 		
-		final StringBuilder sentenciaSql = new StringBuilder();
+		final StringBuilder sqlSentence = new StringBuilder();
+		sqlSentence.append("INSERT INTO ciudad(codigo, nombre, departamento) ");
+		sqlSentence.append("SELECT ?, ?, ?");
 		
-		sentenciaSql.append("INSERT INTO Ciudad (id, nombre, departamento) ");
-		sentenciaSql.append("SELECT ?, ?, ?");
-		
-		try(final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciaSql.toString())){
+		try (final PreparedStatement preparedSqlStatement = getConnection().prepareStatement(sqlSentence.toString()))
+		{
+			preparedSqlStatement.setObject(1, data.getCodigo());
+			preparedSqlStatement.setString(2, data.getNombre());
+			preparedSqlStatement.setObject(3, data.getDepartamento().getCodigo());
 			
-			sentenciaSqlPreparada.setObject(1, data.getId());
-			sentenciaSqlPreparada.setString(2, data.getNombre());
-			sentenciaSqlPreparada.setObject(3, data.getDepartamento().getId());
-			
-			sentenciaSqlPreparada.executeUpdate();
-			
-		} catch (final SQLException excepcion) {
-			
-			var mensajeUsuario = "Se ha presentado un problema tratando de crear una ciudad, Si el problema persiste contacte al administrador";
-			var mensajeTecnico = "Se ha presentado una excepción tipo SQLException tratando de realizar el insert de la ciudad ... en la tabla Pais de la base de datos Azure SQL. Para más detalles, revise de forma completa la excepción raíz presentada";
-			
-			
-			throw new DataPCHExceptions(mensajeUsuario, mensajeTecnico, excepcion);
-		} catch (final Exception excepcion) {
-			
-			var mensajeUsuario = "Se ha presentado un problema tratando de crear una ciudad, Si el problema persiste contacte al administrador";
-			var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar el insert de la ciudad ... en la tabla Pais de la base de datos Azure SQL. Para más detalles, revise de forma completa la excepción raíz presentada";
-			
-			
-			throw new DataPCHExceptions(mensajeUsuario, mensajeTecnico, excepcion);
-			
-			
+			preparedSqlStatement.executeUpdate(); // La ciudad queda insertada
 		}
+		catch (SQLException exception)
 		
+		{
+			var mensajeUsuario = TextHelper.replaceParams("Se ha presentado un problema tratando de crear la ciudad \"{0}\".", data.getNombre());
+			var mensajeTecnico = TextHelper.replaceParams("Se ha presentado una excepción (SQLException) tratando de insertar la ciudad \"{0}\" en la tabla \"Ciudad\" de la base de datos AzureSQL.", data.getNombre());
+
+			throw new DataPCHExceptions(mensajeTecnico, mensajeUsuario, exception);
+		}
+		catch (Exception exception)
+		{
+			var mensajeUsuario = TextHelper.replaceParams("Se ha presentado un problema tratando de crear la ciudad \"{0}\".", data.getNombre());
+			var mensajeTecnico = TextHelper.replaceParams("Se ha presentado una excepción **INESPERADA** (Exception) tratando de insertar la ciudad \"{0}\" en la tabla \"Ciudad\" de la base de datos AzureSQL.", data.getNombre());
+
+			throw new DataPCHExceptions(mensajeTecnico, mensajeUsuario, exception);
+		}
 	}
 
-	public List<CiudadEntity> consultar(CiudadEntity data) {
-		// TODO Auto-generated method stub
+	public List<CiudadEntity> retrieve(CiudadEntity data) {
+		
 		return null;
 	}
 
 	@Override
-	public void modificar(CiudadEntity data) {
-		// TODO Auto-generated method stub
+	public void delete(UUID codigo) {
+				
 		
 	}
 
 	@Override
-	public void eliminar(UUID id) {
+	public void update(CiudadEntity data) {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	
 
 }

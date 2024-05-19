@@ -2,40 +2,37 @@ package co.edu.uco.pch.entity;
 
 import java.util.UUID;
 
-import co.edu.uco.pch.crosscutting.helpers.TextHelper;
+import co.edu.uco.qiu.config.crosscutting.helpers.ExceptionHandler;
+import co.edu.uco.qiu.config.crosscutting.helpers.StringTool;
+import co.edu.uco.qiu.config.entity.CoreEntity;
 
-public class PaisEntity {
+public final class PaisEntity extends CoreEntity {
 	
-	private UUID id;
 	private String nombre;
 	
-	public PaisEntity() {
-	super();
+	public PaisEntity()
+	{
+		super();
 	}
 	
-	public PaisEntity(final UUID id, final String nombre) {
-		setId(id);
-		setNombre(nombre);
+	public PaisEntity( final UUID codigo, final String nombre )
+	{
+		setCodigo( codigo );
+		setNombre( nombre );
 	}
 	
-	public static final PaisEntity build() {
-		return new PaisEntity();
-	}
+	// Setters
 	
-	
-	public final UUID getId() {
-		return id;
-	}
-	public final PaisEntity setId(final UUID id) {
-		this.id = id;
+	public final PaisEntity setNombre( String nombre )
+	{
+		ExceptionHandler.checkDTONullParameter(nombre);
+		
+		this.nombre = StringTool.applyTrim(nombre);
 		return this;
 	}
-	public final String getNombre() {
-		return nombre;
-	}
-	public final PaisEntity setNombre(final String nombre) {
-		this.nombre = TextHelper.applyTrim(nombre);
-		return this;
-	}
+	
+	// Getters
+	
+	public final String getNombre() {return this.nombre;}
 
 }
