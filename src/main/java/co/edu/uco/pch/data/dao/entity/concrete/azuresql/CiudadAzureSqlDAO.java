@@ -28,9 +28,9 @@ public final class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO 
 		
 		try (final PreparedStatement preparedSqlStatement = getConnection().prepareStatement(sqlSentence.toString()))
 		{
-			preparedSqlStatement.setObject(1, data.getCodigo());
+			preparedSqlStatement.setObject(1, data.getId());
 			preparedSqlStatement.setString(2, data.getNombre());
-			preparedSqlStatement.setObject(3, data.getDepartamento().getCodigo());
+			preparedSqlStatement.setObject(3, data.getDepartamento().getId());
 			
 			preparedSqlStatement.executeUpdate(); // La ciudad queda insertada
 		}

@@ -1,10 +1,10 @@
 package co.edu.uco.pch.dto;
 
-import java.util.UUID;
+import java.util.UUID; 
 
-import co.edu.uco.qiu.config.crosscutting.helpers.ExceptionHandler;
-import co.edu.uco.qiu.config.crosscutting.helpers.StringTool;
-import co.edu.uco.qiu.config.dto.CoreDTO;
+import co.edu.uco.pch.crosscutting.helpers.ExceptionHandler;
+import co.edu.uco.pch.crosscutting.helpers.TextHelper;
+import co.edu.uco.pch.dto.CoreDTO;
 
 public final class DepartamentoDTO extends CoreDTO {
 
@@ -29,7 +29,7 @@ public final class DepartamentoDTO extends CoreDTO {
 	{
 		ExceptionHandler.checkDTONullParameter(nombre);
 		
-		this.nombre = StringTool.applyTrim(nombre);
+		this.nombre = TextHelper.applyTrim(nombre);
 		return this;
 	}
 	

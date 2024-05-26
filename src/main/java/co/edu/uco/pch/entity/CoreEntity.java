@@ -1,8 +1,8 @@
 package co.edu.uco.pch.entity;
 
-import java.util.UUID;
+import java.util.UUID; 
 
-import co.edu.uco.qiu.config.crosscutting.helpers.UUIDHelper;
+import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
 
 public class CoreEntity {
 	

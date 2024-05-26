@@ -20,7 +20,7 @@ public final class PaisAssemblerEntity implements AssemblerEntity<PaisDomain, Pa
 		
 		return PaisDomain.build(
 				
-				paisEntityTmp.getCodigo(),
+				paisEntityTmp.getId(),
 				paisEntityTmp.getNombre()
 		);
 	}

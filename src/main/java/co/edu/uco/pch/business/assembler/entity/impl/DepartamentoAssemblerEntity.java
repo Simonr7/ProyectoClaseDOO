@@ -23,7 +23,7 @@ public final class DepartamentoAssemblerEntity implements AssemblerEntity<Depart
 		
 		return DepartamentoDomain.build(
 				
-				deptoEntityTmp.getCodigo(),
+				deptoEntityTmp.getId(),
 				deptoEntityTmp.getNombre(),
 				paisAssembler.toDomain(deptoEntityTmp.getPais())
 		);

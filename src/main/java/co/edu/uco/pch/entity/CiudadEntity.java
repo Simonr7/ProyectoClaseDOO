@@ -2,49 +2,57 @@ package co.edu.uco.pch.entity;
 
 import java.util.UUID;
 
-import co.edu.uco.qiu.config.crosscutting.helpers.ExceptionHandler;
-import co.edu.uco.qiu.config.crosscutting.helpers.StringTool;
-import co.edu.uco.qiu.config.entity.CoreEntity;
+import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.pch.crosscutting.helpers.TextHelper;
+import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
 
-public final class CiudadEntity extends CoreEntity {
-	
+public final class CiudadEntity {
+	private UUID id;
 	private String nombre;
 	private DepartamentoEntity departamento;
-	
-	public CiudadEntity()
-	{
-		super();
+
+	public CiudadEntity() {
+		setId(UUIDHelper.getDefault());
+		setNombre(TextHelper.EMPTY);
+		setDepartamento(DepartamentoEntity.build());
 	}
-	
-	public CiudadEntity( UUID codigo, String nombre, DepartamentoEntity departamento )
-	{
-		setCodigo( codigo );
-		setNombre( nombre );
-		setDepartamento( departamento );
+
+	public CiudadEntity(final UUID id, final String nombre, final DepartamentoEntity departamento) {
+		setId(id);
+		setNombre(nombre);
+		setDepartamento(departamento);
 	}
-	
-	// Setters
-	
-	public final CiudadEntity setNombre( String nombre )
-	{
-		ExceptionHandler.checkDTONullParameter(nombre);
-		
-		this.nombre = StringTool.applyTrim(nombre);
+
+	public static final CiudadEntity build() {
+		return new CiudadEntity();
+	}
+
+	public final UUID getId() {
+		return id;
+	}
+
+	public final CiudadEntity setId(final UUID id) {
+		this.id = id;
 		return this;
 	}
-	
-	public final CiudadEntity setDepartamento( DepartamentoEntity departamento )
-	{
-		ExceptionHandler.checkDTONullParameter(departamento);
-		
-		this.departamento = departamento;
+
+	public final String getNombre() {
+		return nombre;
+	}
+
+	public final CiudadEntity setNombre(final String nombre) {
+		this.nombre = TextHelper.applyTrim(nombre);
+		;
 		return this;
 	}
-	
-	// Getters
-	
-	public final String getNombre() {return this.nombre;}
-	
-	public final DepartamentoEntity getDepartamento() {return this.departamento;}
+
+	public final DepartamentoEntity getDepartamento() {
+		return departamento;
+	}
+
+	public final CiudadEntity setDepartamento(final DepartamentoEntity departamento) {
+		this.departamento = ObjectHelper.getObjectHelper().getDefaultValue(departamento, new DepartamentoEntity());
+		return this;
+	}
 
 }

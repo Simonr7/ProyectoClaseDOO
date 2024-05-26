@@ -41,7 +41,7 @@ public class PaisAzureSqlDAO extends SqlConnection implements PaisDAO {
 		
 		try (final PreparedStatement preparedSqlStatement = getConnection().prepareStatement(sqlSentence.toString()))
 		{
-			preparedSqlStatement.setObject(1, data.getCodigo());
+			preparedSqlStatement.setObject(1, data.getId());
 			preparedSqlStatement.setString(2, data.getNombre());
 			
 			ResultSet resultSet = preparedSqlStatement.executeQuery();

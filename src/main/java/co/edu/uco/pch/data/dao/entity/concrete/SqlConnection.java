@@ -1,6 +1,6 @@
 package co.edu.uco.pch.data.dao.entity.concrete;
 
-import java.sql.Connection; 
+import java.sql.Connection;  
 
 import co.edu.uco.pch.crosscutting.exceptions.customs.CrosscuttingPCHExceptions;
 import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;

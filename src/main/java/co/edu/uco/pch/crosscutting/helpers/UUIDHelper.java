@@ -1,37 +1,32 @@
 package co.edu.uco.pch.crosscutting.helpers;
+
 import java.util.UUID;
 
 public final class UUIDHelper {
-	
+
 	private static final String DEFAULT_UUID_STRING = "00000000-0000-0000-0000-000000000000";
-	
-	private UUIDHelper()
-	{
+
+	private UUIDHelper() {
 		super();
 	}
-	
-	public static final UUID convertToUUID( final String uuidAsString)
-	{
+
+	public static final UUID convertToUUID(final String uuidAsString) {
 		return UUID.fromString(uuidAsString);
 	}
-	
-	public static final UUID getDefault( final UUID value, final UUID defaultValue)
-	{
+
+	public static final UUID getDefault(final UUID value, final UUID defaultValue) {
 		return ObjectHelper.getObjectHelper().getDefaultValue(value, defaultValue);
 	}
-	
-	public static final UUID getDefault()
-	{
+
+	public static final UUID getDefault() {
 		return convertToUUID(DEFAULT_UUID_STRING);
 	}
-	
-	public static final UUID generate()
-	{
+
+	public static final UUID generate() {
 		return UUID.randomUUID();
 	}
-	
-	public static void main(String[] args) {
-		
-		System.out.println(UUID.randomUUID());
+
+	public static final boolean isDefault(final UUID value) {
+		return getDefault(value, getDefault()).equals(getDefault());
 	}
 }

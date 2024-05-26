@@ -19,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
@@ -28,9 +28,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>co.edu.uco.qiu</groupId>
-			<artifactId>qiu_api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
 		</dependency>
 	</dependencies>
 
